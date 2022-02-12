@@ -1,20 +1,23 @@
 import React from 'react';
 import './App.css';
-import { Routes, Route, Link } from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
 import {Login} from "./pages/Login";
 import {ChangePassword} from "./pages/ChangePassword";
 import {Register} from "./pages/Register";
+import {BaseLayout} from "./layouts/BaseLayout";
+import {RequireAuth} from "./layouts/RequireAuth";
 
 function App() {
     return (
-        <>
-
-            <Routes>
-                <Route path={''} component={Login}/>
-                <Route path={'register'} component={Register}/>
-                <Route path={'change-password'} component={ChangePassword}/>
-            </Routes>
-        </>
+        <Routes>
+            <Route element={<BaseLayout/>}>
+                <Route element={<RequireAuth/>}>
+                    <Route path={'/'} element={<Login/>}/>
+                    <Route path={'/register'} element={<Register/>}/>
+                    <Route path={'/change-password'} element={<ChangePassword/>}/>
+                </Route>
+            </Route>
+        </Routes>
     );
 }
 
