@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, Outlet} from "react-router-dom";
+import {Link, Outlet, useLocation} from "react-router-dom";
 import {Col, Layout, Menu, Row} from "antd";
 import {EditOutlined, HomeOutlined, IdcardOutlined} from "@ant-design/icons";
 
@@ -20,14 +20,15 @@ export const BaseLayout = () => {
             icon: <EditOutlined/>
         },
     ]
+    let location = useLocation()
     return (
-        <Layout>
+        <Layout style={{height: '100vh'}}>
             <Header style={{background: "white"}}>
                 <Row justify={'center'}>
                     <Col span={8}>
-                        <Menu mode={"horizontal"}>{
+                        <Menu selectedKeys={location.pathname} mode={"horizontal"}>{
                             navItems.map(({to, name, icon}) => (
-                                <Menu.Item key={name} icon={icon}>
+                                <Menu.Item key={to} icon={icon}>
                                     <Link to={to}>{name}</Link>
                                 </Menu.Item>
                             ))
@@ -36,11 +37,18 @@ export const BaseLayout = () => {
                     </Col>
                 </Row>
             </Header>
-            <Content>
-                <Outlet/>
+            <Content style={{
+                padding: '64px',
+                width: '100%', height: '100%'
+            }}>
+                <Row style={{height: '100%'}} align={'middle'} justify={'center'}>
+                    <Col span={24}>
+                        <Outlet/>
+                    </Col>
+                </Row>
             </Content>
             <Footer>
-                2021
+                2022
             </Footer>
         </Layout>
     )

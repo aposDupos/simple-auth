@@ -1,5 +1,9 @@
 import React from "react";
+import {ChangePasswordForm} from "../components/Forms/ChangePasswordForm";
 
 export const ChangePassword = () => {
-  return <>Change password</>
+    return <>
+        <ChangePasswordForm/>
+        change
+    </>
 }
